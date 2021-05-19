@@ -6,7 +6,7 @@ public class BreakFallWeb : MonoBehaviour
 {
     public float Duration;
     public GameObject web;
-    public GameObject player;
+
 
     void Start()
     {
@@ -23,7 +23,6 @@ public class BreakFallWeb : MonoBehaviour
         }
         else
         {
-            player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             Duration -= Time.deltaTime;
         }
     }

@@ -27,7 +27,7 @@ public class BreakFall : MonoBehaviour
         }
         if (rigidbody.velocity.y < 0.0f && Input.GetKeyDown(KeyCode.M) && Cooldown <= 0.0f && !isActive)
         {
-            Vector3 tempPos = new Vector3(transform.position.x, transform.position.y + 4, transform.position.z);
+            Vector3 tempPos = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
             GameObject web_clone;
             web_clone = Instantiate(web, tempPos, Quaternion.identity) as GameObject;
             DoAbility();
@@ -46,7 +46,6 @@ public class BreakFall : MonoBehaviour
     {
         if (Duration <= 0.0f)
         {
-            Destroy(web);
             isActive = false;
             return;
         }
