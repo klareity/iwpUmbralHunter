@@ -30,7 +30,6 @@ public class BreakFall : MonoBehaviour
             Vector3 tempPos = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
             GameObject web_clone;
             web_clone = Instantiate(web, tempPos, Quaternion.identity) as GameObject;
-            DoAbility();
             isActive = true;
             Cooldown = 1.5f;
             Duration = 3f;

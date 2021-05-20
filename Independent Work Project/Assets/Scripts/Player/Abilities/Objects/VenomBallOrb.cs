@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class VenomBallOrb : MonoBehaviour
 {
-    Vector3 OGPosition;
-    Vector3 mousePos = new Vector3();
-    Vector3 mouseDir;
+    public Vector3 Direction { get; set; }
     bool isActive;
-    Rigidbody2D rigidbody;
+    public Rigidbody2D rigidbody { get; set; }
     public GameObject orb;
     public float range;
     public float speed;
@@ -19,9 +17,6 @@ public class VenomBallOrb : MonoBehaviour
     {
         isActive = true;
         rigidbody = GetComponent<Rigidbody2D>();
-        
-        OGPosition = transform.position;
-        mousePos = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
 
     }
 
@@ -29,16 +24,5 @@ public class VenomBallOrb : MonoBehaviour
     void Update()
     {
         
-        mouseDir = (mousePos - OGPosition).normalized;
-        if ((transform.position - OGPosition).magnitude >= range)
-        {
-            Destroy(orb);
-            return;
-        }
-        else
-        {
-            transform.position += mouseDir.normalized * Time.deltaTime * speed;
-        }
-        //Debug.Log(rigidbody.velocity);
     }
 }
