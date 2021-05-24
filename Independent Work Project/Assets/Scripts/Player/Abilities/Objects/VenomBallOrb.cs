@@ -6,11 +6,11 @@ public class VenomBallOrb : MonoBehaviour
 {
     public Vector3 Direction { get; set; }
     bool isActive;
-    public Rigidbody2D rigidbody { get; set; }
+    public Rigidbody2D rigidbody;
     public GameObject orb;
     public float range;
     public float speed;
-
+    public Vector3 InitalPosition { get; set; }
 
     // Start is called before the first frame update
     void Start()
@@ -24,5 +24,21 @@ public class VenomBallOrb : MonoBehaviour
     void Update()
     {
         
+        if((transform.position - InitalPosition).magnitude>= range)
+        {
+            Destroy(orb);
+            return;
+        }
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("World"))
+        {
+            //Debug.Log("hmmmm");
+            Destroy(orb);
+            return;
+        }
+    }
+
 }

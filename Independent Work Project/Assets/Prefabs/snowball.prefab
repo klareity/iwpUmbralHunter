@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a770973dd447e4cbeec9804ee39345, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rigidbody: {fileID: 0}
   orb: {fileID: 4049133229609773762}
   range: 5
   speed: 10

@@ -9,7 +9,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rigidbody2D;
 
     Vector3 MousePosition;
-    Vector3 MouseDirection;
+    Vector2 MouseDirection;
 
     enum DemonType
     {
@@ -78,11 +78,14 @@ public class PlayerMovement : MonoBehaviour
     void VenomOrb()
     {
         MousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
-        MouseDirection = (MousePosition - transform.position).normalized;
+        MouseDirection = (MousePosition - transform.position);
+        MouseDirection.Normalize();
+        //Debug.Log(MouseDirection);
         GameObject VenomballClone;
         VenomballClone = Instantiate(orb, transform.position, Quaternion.identity) as GameObject;
         VenomballClone.GetComponent<VenomBallOrb>().Direction = MouseDirection;
-        VenomballClone.GetComponent<Rigidbody>().AddForce(MouseDirection, ForceMode.Impulse);
+        VenomballClone.GetComponent<VenomBallOrb>().InitalPosition = transform.position;
+        VenomballClone.GetComponent<Rigidbody2D>().AddForce(MouseDirection * 5, ForceMode2D.Impulse);
         OrbCooldown = 0.5f;
         return;
     }
