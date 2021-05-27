@@ -136,8 +136,6 @@ GameObject:
   - component: {fileID: 448099936}
   - component: {fileID: 448099935}
   - component: {fileID: 448099939}
-  - component: {fileID: 448099940}
-  - component: {fileID: 448099941}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -251,7 +249,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 448099934}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.34, y: 3.07, z: 0}
+  m_LocalPosition: {x: -4.11, y: 2.74, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -278,37 +276,10 @@ MonoBehaviour:
   OrbRange: 0
   OrbSpeed: 0
   orb: {fileID: 4049133229609773762, guid: 9008993de1bfb7641b2ad59050acc4cf, type: 3}
---- !u!114 &448099940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 448099934}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53d1b30865e031546a8000784dd01bed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Cooldown: 1.5
-  Duration: 3
-  web: {fileID: 5750969241351130466, guid: 2a5d3fa6676c739459bba907636361b3, type: 3}
---- !u!114 &448099941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 448099934}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a5d3d118d76c864e883d43d122ef866, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  VenomBall: {fileID: 4049133229609773762, guid: 9008993de1bfb7641b2ad59050acc4cf, type: 3}
-  range: 0
-  cooldown: 0.5
-  speed: 0
+  HookCooldown: 0
+  HookRange: 0
+  HookSpeed: 0
+  hook: {fileID: 141009830457641220, guid: 8ba50170fa8f44240a15bedb0585f97d, type: 3}
 --- !u!1 &495143236
 GameObject:
   m_ObjectHideFlags: 0

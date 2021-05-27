@@ -28,7 +28,12 @@ public class PlayerMovement : MonoBehaviour
     public float OrbSpeed;
     public GameObject orb;
     bool isOrbActive = false;
-    
+    //
+    public float HookCooldown;
+    public float HookRange;
+    public float HookSpeed;
+    public GameObject hook;
+    bool isHookActive = false;
 
     // Start is called before the first frame update
     void Start()
@@ -52,9 +57,13 @@ public class PlayerMovement : MonoBehaviour
         {
             BreakFall();
         }
-        if(Input.GetKeyDown(KeyCode.B)&& OrbCooldown<-0.0f)
+        if(Input.GetKeyDown(KeyCode.B)&& OrbCooldown <= 0.0f)
         {
             VenomOrb();
+        }
+        if(Input.GetKeyDown(KeyCode.C) && HookCooldown <= 0.0f)
+        {
+            WebHook();
         }
         DoAbility();
     }
@@ -80,13 +89,38 @@ public class PlayerMovement : MonoBehaviour
         MousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
         MouseDirection = (MousePosition - transform.position);
         MouseDirection.Normalize();
-        //Debug.Log(MouseDirection);
         GameObject VenomballClone;
         VenomballClone = Instantiate(orb, transform.position, Quaternion.identity) as GameObject;
         VenomballClone.GetComponent<VenomBallOrb>().Direction = MouseDirection;
         VenomballClone.GetComponent<VenomBallOrb>().InitalPosition = transform.position;
         VenomballClone.GetComponent<Rigidbody2D>().AddForce(MouseDirection * 5, ForceMode2D.Impulse);
         OrbCooldown = 0.5f;
+        return;
+    }
+
+    void WebHook()
+    {
+        MousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
+        MouseDirection = (MousePosition - transform.position);
+        MouseDirection.Normalize();
+        GameObject HookClone;
+        HookClone = Instantiate(hook, transform.position, Quaternion.identity) as GameObject;
+        /*
+        1. shoot the hook
+        2. let it fly
+        3a. if out of range/hit nothing
+        3a1. destroy
+
+        3b. if collide with terrain
+        3b1. yeets the player in the direction of the hook
+
+        3c. if collide with enemy
+        3c1. yeets the player in the diretion of the player
+        */
+        HookClone.GetComponent<VenomBallOrb>().Direction = MouseDirection;
+        HookClone.GetComponent<VenomBallOrb>().InitalPosition = transform.position;
+        HookClone.GetComponent<Rigidbody2D>().AddForce(MouseDirection * 7.5f, ForceMode2D.Impulse);
+        HookCooldown = 0.5f;
         return;
     }
 
