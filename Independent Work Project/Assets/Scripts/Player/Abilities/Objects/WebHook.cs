@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class WebHook : MonoBehaviour
 {
+    public Vector3 InitalPosition { get; set; }
     public Vector3 Direction { get; set; }
-    public Rigidbody2D rigidbody;
+    //public Rigidbody2D rigidbody;
     public GameObject hook;
+    public GameObject player { get; set; }
     public float range;
     public float speed;
-    public Vector3 InitalPosition { get; set; }
+    
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        //rigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -21,6 +23,7 @@ public class WebHook : MonoBehaviour
     {
         if ((transform.position - InitalPosition).magnitude >= range)
         {
+            
             Destroy(hook);
             return;
         }
@@ -30,11 +33,20 @@ public class WebHook : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("World"))
         {
+            Direction = (transform.position - InitalPosition);
+            Direction.Normalize();
+            
+            //player.GetComponent<Rigidbody2D>().isKinematic = false;
+            player.GetComponent<Rigidbody2D>().AddForce(Direction * speed, ForceMode2D.Impulse) ;          
             Destroy(hook);
             return;
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
+            Direction = (InitalPosition - collision.gameObject.transform.position );
+            Direction.Normalize();
+            Debug.Log(Direction);
+            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Direction * speed, ForceMode2D.Impulse);
             Destroy(hook);
             return;
         }

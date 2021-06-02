@@ -6,16 +6,18 @@ public class PlayerMovement : MonoBehaviour
 {
     public float movementSpeed;
     public float jumpSpeed;
-    Rigidbody2D rigidbody2D;
+    Rigidbody2D rigidbody2D { get; set; }
+    public GameObject itself;
 
     Vector3 MousePosition;
     Vector2 MouseDirection;
 
     enum DemonType
     {
-        Spider
+        Spider,
+        Fox
     };
-
+    DemonType type = DemonType.Spider;
 
     //Spider Demon related values
     public float WebCooldown;
@@ -46,25 +48,41 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Cooldown();
-        float movement = Input.GetAxis("Horizontal");
-        transform.position += new Vector3(movement  , 0, 0) * Time.deltaTime * movementSpeed;
+        if(!isWebActive)
+        {
+            float movement = Input.GetAxis("Horizontal");
+            transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * movementSpeed;
+        }
+        
 
-        if(Input.GetKeyDown("space") && Mathf.Abs(rigidbody2D.velocity.y) < 0.01f )
+        if (Input.GetKeyDown("space") && Mathf.Abs(rigidbody2D.velocity.y) < 0.01f)
         {
-            rigidbody2D.AddForce(new Vector2(0, jumpSpeed),ForceMode2D.Impulse);
+            rigidbody2D.AddForce(new Vector2(0, jumpSpeed), ForceMode2D.Impulse);
         }
-        if (rigidbody2D.velocity.y < 0.0f && Input.GetKeyDown(KeyCode.M) && WebCooldown <= 0.0f && !isWebActive)
+
+
+        switch(type)
         {
-            BreakFall();
+            case DemonType.Spider:
+                {
+                    if (rigidbody2D.velocity.y < 0.0f && Input.GetKeyDown(KeyCode.M) && WebCooldown <= 0.0f && !isWebActive)
+                    {
+                        BreakFall();
+                    }
+                    if (Input.GetKeyDown(KeyCode.B) && OrbCooldown <= 0.0f)
+                    {
+                        VenomOrb();
+                    }
+                    if (Input.GetKeyDown(KeyCode.C) && HookCooldown <= 0.0f)
+                    {
+                        WebHook();
+                    }
+                    break;
+                }
         }
-        if(Input.GetKeyDown(KeyCode.B)&& OrbCooldown <= 0.0f)
-        {
-            VenomOrb();
-        }
-        if(Input.GetKeyDown(KeyCode.C) && HookCooldown <= 0.0f)
-        {
-            WebHook();
-        }
+
+
+
         DoAbility();
     }
 
@@ -91,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
         MouseDirection.Normalize();
         GameObject VenomballClone;
         VenomballClone = Instantiate(orb, transform.position, Quaternion.identity) as GameObject;
-        VenomballClone.GetComponent<VenomBallOrb>().Direction = MouseDirection;
+        //VenomballClone.GetComponent<VenomBallOrb>().Direction = MouseDirection;
         VenomballClone.GetComponent<VenomBallOrb>().InitalPosition = transform.position;
         VenomballClone.GetComponent<Rigidbody2D>().AddForce(MouseDirection * 5, ForceMode2D.Impulse);
         OrbCooldown = 0.5f;
@@ -117,9 +135,10 @@ public class PlayerMovement : MonoBehaviour
         3c. if collide with enemy
         3c1. yeets the player in the diretion of the player
         */
-        HookClone.GetComponent<VenomBallOrb>().Direction = MouseDirection;
-        HookClone.GetComponent<VenomBallOrb>().InitalPosition = transform.position;
+        //HookClone.GetComponent<WebHook>().Direction = MouseDirection;
+        HookClone.GetComponent<WebHook>().InitalPosition = transform.position;
         HookClone.GetComponent<Rigidbody2D>().AddForce(MouseDirection * 7.5f, ForceMode2D.Impulse);
+        HookClone.GetComponent<WebHook>().player = itself;
         HookCooldown = 0.5f;
         return;
     }
@@ -137,6 +156,10 @@ public class PlayerMovement : MonoBehaviour
         {
             OrbCooldown -= Time.deltaTime;
         }
+        if(HookCooldown >= 0)
+        {
+            HookCooldown -= Time.deltaTime;
+        }
     }
 
     //the abilities are updated here
@@ -152,6 +175,7 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 rigidbody2D.velocity = new Vector2(0, 0);
+
                 WebDuration -= Time.deltaTime;
             }
         }
