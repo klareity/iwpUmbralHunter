@@ -37,6 +37,12 @@ public class VenomBallOrb : MonoBehaviour
             Destroy(orb);
             return;
         }
+        else if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("ouch");
+            Destroy(orb);
+            return;
+        }
     }
 
 }
