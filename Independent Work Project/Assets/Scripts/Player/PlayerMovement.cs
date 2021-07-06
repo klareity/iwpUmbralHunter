@@ -12,12 +12,13 @@ public class PlayerMovement : MonoBehaviour
     Vector3 MousePosition;
     Vector2 MouseDirection;
 
-    enum DemonType
+    public enum DemonType
     {
+        Default,
         Spider,
         Fox
     };
-    DemonType type = DemonType.Spider;
+    public DemonType type = DemonType.Default;
 
     //Spider Demon related values
     public float WebCooldown;
@@ -65,15 +66,15 @@ public class PlayerMovement : MonoBehaviour
         {
             case DemonType.Spider:
                 {
-                    if (rigidbody2D.velocity.y < 0.0f && Input.GetKeyDown(KeyCode.M) && WebCooldown <= 0.0f && !isWebActive)
+                    if (rigidbody2D.velocity.y < 0.0f && Input.GetKeyDown(KeyCode.Q) && WebCooldown <= 0.0f && !isWebActive)
                     {
                         BreakFall();
                     }
-                    if (Input.GetKeyDown(KeyCode.B) && OrbCooldown <= 0.0f)
+                    if (Input.GetKeyDown(KeyCode.W) && OrbCooldown <= 0.0f)
                     {
                         VenomOrb();
                     }
-                    if (Input.GetKeyDown(KeyCode.C) && HookCooldown <= 0.0f)
+                    if (Input.GetKeyDown(KeyCode.E) && HookCooldown <= 0.0f)
                     {
                         WebHook();
                     }

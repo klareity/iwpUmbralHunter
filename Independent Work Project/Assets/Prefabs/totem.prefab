@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 7700172767834194888}
   - component: {fileID: 6182109819469939930}
   - component: {fileID: -9073202661731936330}
+  - component: {fileID: 962381694149826184}
+  - component: {fileID: 5029459983496643812}
   m_Layer: 0
   m_Name: totem
   m_TagString: Enemy
@@ -151,3 +153,31 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &962381694149826184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101731487497350537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f6acf327743dcc428b8375687f71702, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5029459983496643812
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101731487497350537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ad5a4e88e4590a4cb3c6328374967f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  minX: 0
+  maxX: 0
+  isRight: 0

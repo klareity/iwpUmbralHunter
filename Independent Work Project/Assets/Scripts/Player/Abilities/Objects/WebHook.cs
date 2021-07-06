@@ -47,6 +47,7 @@ public class WebHook : MonoBehaviour
             Direction.Normalize();
             Debug.Log(Direction);
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Direction * speed, ForceMode2D.Impulse);
+            collision.gameObject.GetComponent<EnemyBase>().health -= 2;
             Destroy(hook);
             return;
         }

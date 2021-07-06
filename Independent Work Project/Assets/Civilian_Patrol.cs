@@ -23,13 +23,16 @@ public class Civilian_Patrol : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if(rb2d.position.x > InitialPos.x - minX)
+        if(rb2d.position.x > InitialPos.x + maxX || animator.GetComponent<CivilianScript>().isRight == false)
         {
             Vector2 Lefttarget = new Vector2(InitialPos.x - minX, rb2d.position.y);
         }
        
-
-        Vector2 Righttarget = new Vector2(InitialPos.x + maxX, rb2d.position.y);
+        else if(rb2d.position.x < InitialPos.x - minX || animator.GetComponent<CivilianScript>().isRight == true)
+        {
+            Vector2 Righttarget = new Vector2(InitialPos.x + maxX, rb2d.position.y);
+        }
+        
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

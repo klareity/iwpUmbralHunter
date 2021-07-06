@@ -39,7 +39,8 @@ public class VenomBallOrb : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("ouch");
+            //Debug.Log("ouch");
+            collision.gameObject.GetComponent<EnemyBase>().health -= 3;
             Destroy(orb);
             return;
         }
