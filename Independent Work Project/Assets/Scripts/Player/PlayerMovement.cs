@@ -22,7 +22,7 @@ public class PlayerMovement : MonoBehaviour
 
     //Spider Demon related values
     public float WebCooldown;
-    public float WebDuration;
+    public float WebSpeed;
     public GameObject web;
     bool isWebActive = false;
     //
@@ -49,12 +49,13 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Cooldown();
-        if(!isWebActive)
-        {
-            float movement = Input.GetAxis("Horizontal");
-            transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * movementSpeed;
-        }
-        
+        //if (!isWebActive)
+        //{
+
+        //}
+        float movement = Input.GetAxis("Horizontal");
+        transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * movementSpeed;
+
 
         if (Input.GetKeyDown("space") && Mathf.Abs(rigidbody2D.velocity.y) < 0.01f)
         {
@@ -66,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
         {
             case DemonType.Spider:
                 {
-                    if (rigidbody2D.velocity.y < 0.0f && Input.GetKeyDown(KeyCode.Q) && WebCooldown <= 0.0f && !isWebActive)
+                    if (Input.GetKeyDown(KeyCode.Mouse0) && WebCooldown <= 0.0f)
                     {
                         BreakFall();
                     }
@@ -74,7 +75,7 @@ public class PlayerMovement : MonoBehaviour
                     {
                         VenomOrb();
                     }
-                    if (Input.GetKeyDown(KeyCode.E) && HookCooldown <= 0.0f)
+                    if (Input.GetKeyDown(KeyCode.Mouse1) && HookCooldown <= 0.0f)
                     {
                         WebHook();
                     }
@@ -90,17 +91,20 @@ public class PlayerMovement : MonoBehaviour
 
     #region SpiderDemonAbilities
 
+    //to be reworked where it helps with the player's mobilities as opposed to dropping down.
+
     void BreakFall()
     {
+        MousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
+        MouseDirection = (MousePosition - transform.position).normalized;
 
-        Vector3 tempPos = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
-        GameObject web_clone;
-        web_clone = Instantiate(web, tempPos, Quaternion.identity) as GameObject;
-        isWebActive = true;
-        WebCooldown = 1.5f;
-        WebDuration = 3f;
-        return;
-        
+        GameObject WebClone;
+        WebClone = Instantiate(web, transform.position, Quaternion.identity) as GameObject;
+        WebClone.GetComponent<BreakFallWeb>().InitalPosition = transform.position;
+        WebClone.GetComponent<Rigidbody2D>().AddForce(MouseDirection * WebSpeed, ForceMode2D.Impulse);
+        WebClone.GetComponent<BreakFallWeb>().player = itself;
+
+        return;  
     }
 
     void VenomOrb()
@@ -120,8 +124,8 @@ public class PlayerMovement : MonoBehaviour
     void WebHook()
     {
         MousePosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y));
-        MouseDirection = (MousePosition - transform.position);
-        MouseDirection.Normalize();
+        MouseDirection = (MousePosition - transform.position).normalized;
+        //MouseDirection.Normalize();
         GameObject HookClone;
         HookClone = Instantiate(hook, transform.position, Quaternion.identity) as GameObject;
         /*
@@ -129,16 +133,12 @@ public class PlayerMovement : MonoBehaviour
         2. let it fly
         3a. if out of range/hit nothing
         3a1. destroy
-
-        3b. if collide with terrain
-        3b1. yeets the player in the direction of the hook
-
         3c. if collide with enemy
         3c1. yeets the player in the diretion of the player
         */
         //HookClone.GetComponent<WebHook>().Direction = MouseDirection;
         HookClone.GetComponent<WebHook>().InitalPosition = transform.position;
-        HookClone.GetComponent<Rigidbody2D>().AddForce(MouseDirection * 7.5f, ForceMode2D.Impulse);
+        HookClone.GetComponent<Rigidbody2D>().AddForce(MouseDirection * HookSpeed, ForceMode2D.Impulse);
         HookClone.GetComponent<WebHook>().player = itself;
         HookCooldown = 0.5f;
         return;
@@ -151,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (WebCooldown >= 0f)
         {
-            WebCooldown -= Time.deltaTime;
+            //WebCooldown -= Time.deltaTime;
         }
         if(OrbCooldown>=0)
         {
@@ -166,19 +166,19 @@ public class PlayerMovement : MonoBehaviour
     //the abilities are updated here
     void DoAbility()
     {
-        if(isWebActive)
-        {
-            if (WebDuration <= 0.0f)
-            {
-                isWebActive = false;
-                return;
-            }
-            else
-            {
-                rigidbody2D.velocity = new Vector2(0, 0);
+        //if(isWebActive)
+        //{
+        //    if (WebDuration <= 0.0f)
+        //    {
+        //        isWebActive = false;
+        //        return;
+        //    }
+        //    else
+        //    {
+        //        rigidbody2D.velocity = new Vector2(0, 0);
 
-                WebDuration -= Time.deltaTime;
-            }
-        }
+        //        WebDuration -= Time.deltaTime;
+        //    }
+        //}
     }
 }

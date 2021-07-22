@@ -146,4 +146,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hook: {fileID: 141009830457641220}
   range: 10
-  speed: 1.75
+  speed: 7.5

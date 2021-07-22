@@ -33,18 +33,18 @@ public class WebHook : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("World"))
         {
-            Direction = (transform.position - InitalPosition);
-            Direction.Normalize();
+            Direction = (transform.position - InitalPosition).normalized;
+            //Direction.Normalize();
             
             //player.GetComponent<Rigidbody2D>().isKinematic = false;
             player.GetComponent<Rigidbody2D>().AddForce(Direction * speed, ForceMode2D.Impulse) ;          
             Destroy(hook);
             return;
         }
-        else if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            Direction = (InitalPosition - collision.gameObject.transform.position );
-            Direction.Normalize();
+            Direction = (InitalPosition - collision.gameObject.transform.position).normalized;
+            //Direction.Normalize();
             Debug.Log(Direction);
             collision.gameObject.GetComponent<Rigidbody2D>().AddForce(Direction * speed, ForceMode2D.Impulse);
             collision.gameObject.GetComponent<EnemyBase>().health -= 2;
