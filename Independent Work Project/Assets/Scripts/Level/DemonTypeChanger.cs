@@ -6,46 +6,59 @@ using UnityEngine.UI;
 public class DemonTypeChanger : MonoBehaviour
 {
     public Text Demon_Type, DemonTypeHeadsUp;
+    bool isInteractble;
+    public GameObject player;
+
+    public enum DemonTypeSetting
+    {
+        Default,
+        Spider,
+        Fox
+    };
+
+    public DemonTypeSetting dts;
     //temp stuff, will refactor
 
 
     // Start is called before the first frame update
     void Start()
     {
-        Demon_Type.text = "Demon Type: Default";
-        DemonTypeHeadsUp.text = " ";
+        //Demon_Type.text = "Demon Type: Default";
+        //DemonTypeHeadsUp.text = " ";
+        isInteractble = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(isInteractble == true && Input.GetKeyDown(KeyCode.F))
+        {
+            player.GetComponent<PlayerMovement>().type = PlayerMovement.DemonType.Spider;
+            Demon_Type.text = "Demon Type: Spider";
+        }
     }
 
+    //if within range, allow the player to interact
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Player"))
         {
-           
-            collision.gameObject.GetComponent<PlayerMovement>().type = PlayerMovement.DemonType.Spider;
-            Demon_Type.text = "Demon Type: Spider";
-            //Debug.Log(collision.gameObject.GetComponent<PlayerMovement>().type);
-            //if (Input.GetKeyDown(KeyCode.F))
-            //{
-            //    Debug.Log("ayayaya");
-            //    collision.gameObject.GetComponent<PlayerMovement>().type = PlayerMovement.DemonType.Spider;
-            //    Debug.Log(collision.gameObject.GetComponent<PlayerMovement>().type);
-            //}
+            isInteractble = true;
+            //collision.gameObject.GetComponent<PlayerMovement>().type = PlayerMovement.DemonType.Spider;
+            
+            DemonTypeHeadsUp.gameObject.SetActive(true);
         }
     }
 
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if(collision.gameObject.CompareTag("Player") && Input.GetKeyDown(KeyCode.T))
-    //    {
+    //if not within range, dont allow the player to interact
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            isInteractble = false;
+            DemonTypeHeadsUp.gameObject.SetActive(false);
 
-    //        Debug.Log("pingpong");
-            
-    //    }
-    //}
+        }
+    }
+
 }
