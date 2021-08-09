@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8949851789752027892}
   - component: {fileID: 8949851789752027893}
   - component: {fileID: 8949851789752027890}
-  - component: {fileID: 5458175179313886066}
   - component: {fileID: 8571788737106200605}
   m_Layer: 0
   m_Name: Arrow Dispensor
@@ -111,19 +110,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.64}
   m_EdgeRadius: 0
---- !u!114 &5458175179313886066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8949851789752027891}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f6acf327743dcc428b8375687f71702, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 5
 --- !u!114 &8571788737106200605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c4b22a0e926f5640bd654afc57b7af4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 3
   Firing: {fileID: 21300000, guid: 5d4be4a19a6b84b46ae920061b7fd247, type: 3}
   NotFiring: {fileID: 21300000, guid: f4c6d16218ef53a4bb3214bee486935a, type: 3}
   Arrow: {fileID: 6681844851841373036, guid: 1f5f10c07cf30c143bd20fb773e666fa, type: 3}

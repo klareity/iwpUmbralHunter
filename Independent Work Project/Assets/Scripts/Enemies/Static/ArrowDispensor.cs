@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArrowDispensor : MonoBehaviour
+public class ArrowDispensor : EnemyBase
 {
     public Sprite Firing, NotFiring;
     public GameObject Arrow;// what this thing shoots out
@@ -88,7 +88,7 @@ public class ArrowDispensor : MonoBehaviour
             spriteRenderer.sprite = NotFiring;
         }
 
-        Debug.Log(isActive);
+        
     }
 
     void countdown()

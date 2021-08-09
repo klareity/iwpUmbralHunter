@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   web: {fileID: 5750969241351130466}
-  range: 10
+  range: 7
   speed: 5
 --- !u!58 &5750969241351130465
 CircleCollider2D:
