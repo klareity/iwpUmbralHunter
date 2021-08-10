@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2540515275409851302}
   m_Layer: 0
   m_Name: DemonTypeChanger
-  m_TagString: Untagged
+  m_TagString: Interactables
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,9 +70,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1233684001
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: f12fa724c62ba2e42a40628435eb8f41, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -112,3 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1829dfbbef4648848ba55beba8ecce15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Demon_Type: {fileID: 0}
+  DemonTypeHeadsUp: {fileID: 0}
+  player: {fileID: 0}
+  dts: 0

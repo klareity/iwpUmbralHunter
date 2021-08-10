@@ -28,6 +28,7 @@ public class EnemyArrow : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            collision.gameObject.GetComponent<PlayerMovement>().PlayerHealth -= 1;
             Destroy(itself);
             return;
         }

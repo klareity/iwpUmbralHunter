@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
     public float movementSpeed;
     public float jumpSpeed;
+    public int PlayerHealth;
+    public Text HealthUI, AbilityOne, AbilityTwo;
     Rigidbody2D rigidbody2D { get; set; }
     public GameObject itself;
 
@@ -21,22 +24,24 @@ public class PlayerMovement : MonoBehaviour
     public DemonType type = DemonType.Default;
 
     //Spider Demon related values
-    public float WebCooldown;
+    //the movement thing
+    public float WebCooldown;//5
     public float WebSpeed;
     public GameObject web;
     bool isWebActive = false;
     //
     public float OrbCooldown;
-    public float OrbRange;
     public float OrbSpeed;
     public GameObject orb;
     bool isOrbActive = false;
     //
-    public float HookCooldown;
-    public float HookRange;
+    //the hooking in enemy thing
+    public float HookCooldown;//3
     public float HookSpeed;
     public GameObject hook;
     bool isHookActive = false;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -48,11 +53,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         Cooldown();
-        //if (!isWebActive)
-        //{
+        UpdateUI();
 
-        //}
         float movement = Input.GetAxis("Horizontal");
         transform.position += new Vector3(movement, 0, 0) * Time.deltaTime * movementSpeed;
 
@@ -71,10 +75,10 @@ public class PlayerMovement : MonoBehaviour
                     {
                         BreakFall();
                     }
-                    if (Input.GetKeyDown(KeyCode.W) && OrbCooldown <= 0.0f)
-                    {
-                        VenomOrb();
-                    }
+                    //if (Input.GetKeyDown(KeyCode.W) && OrbCooldown <= 0.0f)
+                    //{
+                    //    VenomOrb();
+                    //}
                     if (Input.GetKeyDown(KeyCode.Mouse1) && HookCooldown <= 0.0f)
                     {
                         WebHook();
@@ -85,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 
-        DoAbility();
+        //DoAbility();
     }
 
 
@@ -103,7 +107,7 @@ public class PlayerMovement : MonoBehaviour
         WebClone.GetComponent<BreakFallWeb>().InitalPosition = transform.position;
         WebClone.GetComponent<Rigidbody2D>().AddForce(MouseDirection * WebSpeed, ForceMode2D.Impulse);
         WebClone.GetComponent<BreakFallWeb>().player = itself;
-
+        WebCooldown = 5.0f;
         return;  
     }
 
@@ -140,7 +144,7 @@ public class PlayerMovement : MonoBehaviour
         HookClone.GetComponent<WebHook>().InitalPosition = transform.position;
         HookClone.GetComponent<Rigidbody2D>().AddForce(MouseDirection * HookSpeed, ForceMode2D.Impulse);
         HookClone.GetComponent<WebHook>().player = itself;
-        HookCooldown = 0.5f;
+        HookCooldown = 3.0f;
         return;
     }
 
@@ -151,7 +155,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (WebCooldown >= 0f)
         {
-            //WebCooldown -= Time.deltaTime;
+            WebCooldown -= Time.deltaTime;
         }
         if(OrbCooldown>=0)
         {
@@ -180,5 +184,16 @@ public class PlayerMovement : MonoBehaviour
         //        WebDuration -= Time.deltaTime;
         //    }
         //}
+    }
+
+    void UpdateUI()
+    {
+        int tempWeb, tempHook;
+        tempWeb = (int)WebCooldown;
+        tempHook = (int)HookCooldown;
+
+        AbilityOne.text = "Web Cooldown: " + tempWeb.ToString();
+        AbilityTwo.text = "Hook Cooldown: " + tempHook.ToString();
+        HealthUI.text = "Health : " + PlayerHealth.ToString();
     }
 }
