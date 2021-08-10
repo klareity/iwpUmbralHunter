@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed;
     public float jumpSpeed;
     public int PlayerHealth;
-    public Text HealthUI, AbilityOne, AbilityTwo;
+    public Text HealthUI, AbilityOne, AbilityTwo, AbilityThree;
     Rigidbody2D rigidbody2D { get; set; }
     public GameObject itself;
 
@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     //
     public float OrbCooldown;
     public float OrbSpeed;
-    public GameObject orb;
+    public GameObject orb;//1
     bool isOrbActive = false;
     //
     //the hooking in enemy thing
@@ -75,10 +75,10 @@ public class PlayerMovement : MonoBehaviour
                     {
                         BreakFall();
                     }
-                    //if (Input.GetKeyDown(KeyCode.W) && OrbCooldown <= 0.0f)
-                    //{
-                    //    VenomOrb();
-                    //}
+                    if (Input.GetKeyDown(KeyCode.Alpha1) && OrbCooldown <= 0.0f)
+                    {
+                        VenomOrb();
+                    }
                     if (Input.GetKeyDown(KeyCode.Mouse1) && HookCooldown <= 0.0f)
                     {
                         WebHook();
@@ -120,8 +120,8 @@ public class PlayerMovement : MonoBehaviour
         VenomballClone = Instantiate(orb, transform.position, Quaternion.identity) as GameObject;
         //VenomballClone.GetComponent<VenomBallOrb>().Direction = MouseDirection;
         VenomballClone.GetComponent<VenomBallOrb>().InitalPosition = transform.position;
-        VenomballClone.GetComponent<Rigidbody2D>().AddForce(MouseDirection * 5, ForceMode2D.Impulse);
-        OrbCooldown = 0.5f;
+        VenomballClone.GetComponent<Rigidbody2D>().AddForce(MouseDirection * OrbSpeed, ForceMode2D.Impulse);
+        OrbCooldown = 2.0f;
         return;
     }
 
@@ -188,12 +188,14 @@ public class PlayerMovement : MonoBehaviour
 
     void UpdateUI()
     {
-        int tempWeb, tempHook;
+        int tempWeb, tempHook, tempOrb;
         tempWeb = (int)WebCooldown;
         tempHook = (int)HookCooldown;
+        tempOrb = (int)OrbCooldown;
 
         AbilityOne.text = "Web Cooldown: " + tempWeb.ToString();
         AbilityTwo.text = "Hook Cooldown: " + tempHook.ToString();
+        AbilityThree.text = "OrbCooldown: " + tempOrb.ToString();
         HealthUI.text = "Health : " + PlayerHealth.ToString();
     }
 }

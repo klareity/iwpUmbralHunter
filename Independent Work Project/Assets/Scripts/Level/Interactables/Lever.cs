@@ -46,7 +46,15 @@ public class Lever : BaseInteractable
     {
         for(int i =0; i< InteractableList.Count; ++i)
         {
-            InteractableList[i].GetComponent<BaseInteractable>().isActive = !InteractableList[i].GetComponent<BaseInteractable>().isActive;
+            if (InteractableList[i].GetComponent<BaseInteractable>() != null)
+            {
+                InteractableList[i].GetComponent<BaseInteractable>().isActive = !InteractableList[i].GetComponent<BaseInteractable>().isActive;
+            }
+            else if(InteractableList[i].CompareTag("Level"))
+            {
+                InteractableList[i].SetActive(true);
+            }
+            
         }
     }
 

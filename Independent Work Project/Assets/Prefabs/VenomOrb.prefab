@@ -136,5 +136,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rigidbody: {fileID: 0}
   orb: {fileID: 4049133229609773762}
-  range: 5
+  range: 10
   speed: 10

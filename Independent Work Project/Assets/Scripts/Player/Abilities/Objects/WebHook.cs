@@ -31,16 +31,16 @@ public class WebHook : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("World"))
-        {
-            Direction = (transform.position - InitalPosition).normalized;
-            //Direction.Normalize();
+        //if (collision.gameObject.CompareTag("World"))
+        //{
+        //    Direction = (transform.position - InitalPosition).normalized;
+        //    //Direction.Normalize();
             
-            //player.GetComponent<Rigidbody2D>().isKinematic = false;
-            player.GetComponent<Rigidbody2D>().AddForce(Direction * speed, ForceMode2D.Impulse) ;          
-            Destroy(hook);
-            return;
-        }
+        //    //player.GetComponent<Rigidbody2D>().isKinematic = false;
+        //    player.GetComponent<Rigidbody2D>().AddForce(Direction * speed, ForceMode2D.Impulse) ;          
+        //    Destroy(hook);
+        //    return;
+        //}
         if (collision.gameObject.CompareTag("Enemy"))
         {
             Direction = (InitalPosition - collision.gameObject.transform.position).normalized;

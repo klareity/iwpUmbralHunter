@@ -116,7 +116,4 @@ MonoBehaviour:
   On: {fileID: 21300000, guid: 2bc26531e4cd19048ae6dd3bf1d81b8e, type: 3}
   Off: {fileID: 21300000, guid: fa9da3bf52261d24d81a112c600477a1, type: 3}
   HeadsUp: {fileID: 0}
-  InteractableList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  InteractableList: []

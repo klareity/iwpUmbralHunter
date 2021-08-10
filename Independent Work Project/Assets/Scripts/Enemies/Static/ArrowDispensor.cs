@@ -41,6 +41,14 @@ public class ArrowDispensor : EnemyBase
     // Update is called once per frame
     void Update()
     {
+
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+
         countdown();
 
         if(RoF <= 0.0f)

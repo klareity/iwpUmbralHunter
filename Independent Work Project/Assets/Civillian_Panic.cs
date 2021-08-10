@@ -19,7 +19,7 @@ public class Civillian_Panic : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        Debug.Log("Im paniking");
+        //Debug.Log("Im paniking");
         //if player out of range, unpanic
         if(Vector2.Distance(player.position, rb2d.position)>=panicDistance)
         {
