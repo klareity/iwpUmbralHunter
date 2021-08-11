@@ -34,6 +34,7 @@ public class LevelTransition : MonoBehaviour
             
             //Debug.Log(NextLevelSpawnpoint);
             collision.gameObject.transform.position = NextLevelSpawnpoint;
+            collision.gameObject.GetComponent<PlayerMovement>().PlayerHealth = 10;
         }
         else
         {
